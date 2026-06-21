@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HR.LeaveManagement.Application.Contracts.Persistence;
+using HR.LeaveManagement.Application.Exceptions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,10 @@ public class UpdateLeaveTypeCommandHandler : IRequestHandler<UpdateLeaveTypeComm
 
       // Convert to domain entity object
       var leaveTypeToUpdate = _mapper.Map<Domain.LeaveType>(request);
-
+      if (leaveTypeToUpdate == null)
+      {
+         throw new NotFoundException(nameof(LeaveType), request.Name);
+      }
       // add to database
       await _leaveTypeRepository.UpdateAsync(leaveTypeToUpdate);
 
