@@ -23,4 +23,9 @@ public class LeaveAllocation : BaseEntity
    /// Period of time.
    /// </summary>
    public int Period { get; set; }
+
+   /// <summary>
+   /// Employee Id.
+   /// </summary>
+   public string EmployeeId { get; set; } = string.Empty;
 }
